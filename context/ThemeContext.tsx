@@ -2,7 +2,7 @@ import * as React from 'react';
 import { createTheme } from '@mui/material';
 import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 import { Theme } from '~/utilities/const';
-import '~/style/MUI-theme.scss';
+import { useMUIStyles } from '~/hooks/useMUIStyles';
 
 type ThemeProviderProps = {
   theme?: Theme;
@@ -19,6 +19,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 }) => {
   const themeValue = React.useMemo(() => ({ theme }), [theme]);
   const createMUITheme = React.useMemo(() => createTheme({ cssVariables: true }), []);
+
+  // Automatically load MUI styles when MUI theme is selected
+  useMUIStyles(theme === Theme.MUI);
 
   React.useEffect(() => {
     // Apply the theme based on the theme enum value
