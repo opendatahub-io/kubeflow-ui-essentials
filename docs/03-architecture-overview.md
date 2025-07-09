@@ -113,26 +113,64 @@ The **mod-arch-shared** library provides common functionality, components, and p
 
 ## The Big Picture
 
-```text
-┌─────────────────────────────────────────────────────────────────┐
-│                     AI Platform Dashboard                       │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                 │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐            │
-│  │  Model      │  │ Experiment  │  │   Serving   │    ...     │
-│  │ Registry    │  │  Tracking   │  │ Dashboards  │            │
-│  │   Module    │  │   Module    │  │   Module    │            │
-│  │             │  │             │  │             │            │
-│  │ ┌─────────┐ │  │ ┌─────────┐ │  │ ┌─────────┐ │            │
-│  │ │Frontend │ │  │ │Frontend │ │  │ │Frontend │ │            │
-│  │ └─────────┘ │  │ └─────────┘ │  │ └─────────┘ │            │
-│  │ ┌─────────┐ │  │ ┌─────────┐ │  │ ┌─────────┐ │            │
-│  │ │   BFF   │ │  │ │   BFF   │ │  │ │   BFF   │ │            │
-│  │ └─────────┘ │  │ └─────────┘ │  │ └─────────┘ │            │
-│  └─────────────┘  └─────────────┘  └─────────────┘            │
-│                                                                 │
-│                    Shared Library Foundation                    │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+graph TB
+    subgraph Platform["AI Platform Dashboard"]
+        subgraph Modules["Application Modules"]
+            subgraph ModelRegistryModule["Model Registry Module"]
+                MRFrontend["Frontend<br/>React App"]
+                MRBFF["BFF<br/>Go Service"]
+                MRFrontend --- MRBFF
+            end
+            
+            subgraph ExperimentModule["Experiment Tracking Module"]
+                ETFrontend["Frontend<br/>React App"]
+                ETBFF["BFF<br/>Go Service"]
+                ETFrontend --- ETBFF
+            end
+            
+            subgraph ServingModule["Serving Dashboards Module"]
+                SFrontend["Frontend<br/>React App"]
+                SBFF["BFF<br/>Go Service"]
+                SFrontend --- SBFF
+            end
+            
+            subgraph OtherModules["... Other Modules"]
+                OFrontend["Frontend<br/>React App"]
+                OBFF["BFF<br/>Go Service"]
+                OFrontend --- OBFF
+            end
+        end
+        
+        subgraph SharedFoundation["Shared Library Foundation"]
+            SharedLibrary["mod-arch-shared<br/>Components & Utilities"]
+            DesignSystem["Design System<br/>Themes & Patterns"]
+            CommonAPI["Common APIs<br/>Auth & Utils"]
+        end
+    end
+    
+    MRFrontend -.-> SharedLibrary
+    ETFrontend -.-> SharedLibrary
+    SFrontend -.-> SharedLibrary
+    OFrontend -.-> SharedLibrary
+    
+    MRFrontend -.-> DesignSystem
+    ETFrontend -.-> DesignSystem
+    SFrontend -.-> DesignSystem
+    OFrontend -.-> DesignSystem
+    
+    MRBFF -.-> CommonAPI
+    ETBFF -.-> CommonAPI
+    SBFF -.-> CommonAPI
+    OBFF -.-> CommonAPI
+    
+    style Platform fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style Modules fill:#e1f5fe,stroke:#333,stroke-width:1px
+    style SharedFoundation fill:#e8f5e8,stroke:#333,stroke-width:1px
+    style ModelRegistryModule fill:#fff3e0,stroke:#ff9800,stroke-width:1px
+    style ExperimentModule fill:#f3e5f5,stroke:#9c27b0,stroke-width:1px
+    style ServingModule fill:#e0f2f1,stroke:#4caf50,stroke-width:1px
+    style OtherModules fill:#fce4ec,stroke:#e91e63,stroke-width:1px
 ```
 
 Each module consists of:
@@ -162,11 +200,6 @@ For detailed implementation guidance, see:
 - [Implementation Approaches](./05-implementation-approaches.md)
 - [Getting Started Guide](./10-getting-started.md)
 - [Shared Library Guide](./12-shared-library-guide.md)
-│  └─────────────┘  └─────────────┘  └─────────────┘            │
-│                                                                 │
-│                    Shared Library Foundation                    │
-└─────────────────────────────────────────────────────────────────┘
-```
 
 Each module consists of:
 

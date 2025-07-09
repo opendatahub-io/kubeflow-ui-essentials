@@ -4,6 +4,59 @@ We support multiple implementation strategies to accommodate different deploymen
 
 ## Overview of Approaches
 
+```mermaid
+graph TB
+    subgraph "1. Standalone Micro-Frontend"
+        StandaloneApp1["Model Registry App<br/>Independent Deployment"]
+        StandaloneApp2["Notebooks App<br/>Independent Deployment"]
+        StandaloneApp3["Pipelines App<br/>Independent Deployment"]
+        
+        Host1["Host Platform A<br/>(RHOAI)"]
+        Host2["Host Platform B<br/>(Upstream)"]
+        
+        StandaloneApp1 -.-> Host1
+        StandaloneApp1 -.-> Host2
+        StandaloneApp2 -.-> Host1
+        StandaloneApp3 -.-> Host2
+        
+        style StandaloneApp1 fill:#e1f5fe
+        style StandaloneApp2 fill:#f3e5f5
+        style StandaloneApp3 fill:#e8f5e8
+    end
+    
+    subgraph "2. Module Federation"
+        HostApp["Host Application<br/>Module Federation Runtime"]
+        RemoteModule1["Remote Module 1<br/>@runtime loading"]
+        RemoteModule2["Remote Module 2<br/>@runtime loading"]
+        RemoteModule3["Remote Module 3<br/>@runtime loading"]
+        
+        HostApp --> RemoteModule1
+        HostApp --> RemoteModule2
+        HostApp --> RemoteModule3
+        
+        style HostApp fill:#fff3e0
+        style RemoteModule1 fill:#e1f5fe
+        style RemoteModule2 fill:#f3e5f5
+        style RemoteModule3 fill:#e8f5e8
+    end
+    
+    subgraph "3. Hybrid Approach"
+        HybridHost["Platform Host"]
+        StandaloneModule["Standalone Module<br/>Independent App"]
+        FederatedModule["Federated Module<br/>Runtime Loaded"]
+        LegacyModule["Legacy Module<br/>Integrated Component"]
+        
+        HybridHost --> StandaloneModule
+        HybridHost --> FederatedModule
+        HybridHost --> LegacyModule
+        
+        style HybridHost fill:#fce4ec
+        style StandaloneModule fill:#e1f5fe
+        style FederatedModule fill:#fff3e0
+        style LegacyModule fill:#f5f5f5
+    end
+```
+
 ### 1. Standalone Micro-Frontend Approach
 
 **Best for**: New features, upstream-first development, and independent deployment scenarios.

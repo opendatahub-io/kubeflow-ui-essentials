@@ -11,6 +11,48 @@ Our existing AI platform dashboard operates as a **monolithic application** with
 - **Architecture**: Centralized codebase with tightly coupled components
 - **Deployment**: Single deployable unit containing all features
 
+```mermaid
+graph TB
+    subgraph "Current Monolithic Architecture"
+        subgraph SingleRepo["Single Repository"]
+            AllFeatures["All Features<br/>Model Registry + Notebooks<br/>+ Pipelines + Serving<br/>+ Data Science + ..."]
+            SharedCode["Shared Codebase<br/>Tightly Coupled Components"]
+            SingleBuild["Single Build Process<br/>15+ minute builds"]
+        end
+        
+        subgraph TeamBottlenecks["Team Coordination Issues"]
+            MergeConflicts["Merge Conflicts<br/>❌ Multiple teams, same code"]
+            CoordinationOverhead["Coordination Overhead<br/>📞 Constant team meetings"]
+            ReleaseBlocking["Release Blocking<br/>🚫 Features wait for each other"]
+        end
+        
+        subgraph DeploymentIssues["Deployment Challenges"]
+            AllOrNothing["All-or-Nothing Releases<br/>🚀 Deploy everything or nothing"]
+            HighRisk["High Risk Deployments<br/>⚠️ Small changes = big risk"]
+            SlowRollback["Slow Rollback<br/>⏪ Rollback entire application"]
+        end
+        
+        subgraph UpstreamBarriers["Upstream Contribution Barriers"]
+            HighEntryBarrier["High Entry Barrier<br/>🧗‍♂️ Must understand everything"]
+            ComplexSetup["Complex Setup<br/>🔧 Hours to get started"]
+            BroadApproval["Broad Approval Required<br/>👥 Many stakeholders"]
+        end
+    end
+    
+    AllFeatures --> TeamBottlenecks
+    AllFeatures --> DeploymentIssues
+    AllFeatures --> UpstreamBarriers
+    SharedCode --> TeamBottlenecks
+    SingleBuild --> DeploymentIssues
+    
+    style AllFeatures fill:#ffcdd2
+    style SharedCode fill:#ffcdd2
+    style SingleBuild fill:#ffcdd2
+    style TeamBottlenecks fill:#fff3e0
+    style DeploymentIssues fill:#fff3e0
+    style UpstreamBarriers fill:#fff3e0
+```
+
 ## Pain Points and Challenges
 
 This monolithic approach has created several significant challenges that impact our development velocity and platform scalability:

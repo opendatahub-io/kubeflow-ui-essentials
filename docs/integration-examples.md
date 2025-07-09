@@ -691,11 +691,14 @@ Module Federation provides the technical foundation for our modular architecture
 
 #### High-Level System Architecture
 
-```text
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Host App      │    │   Backend       │    │   Remote Apps   │
-│   (Dashboard)   │◄──►│   (Proxy)       │◄──►│   (Modules)     │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
+```mermaid
+graph LR
+    HostApp["Host App<br/>(Dashboard)"] <--> Backend["Backend<br/>(Proxy)"]
+    Backend <--> RemoteApps["Remote Apps<br/>(Modules)"]
+    
+    style HostApp fill:#e1f5fe
+    style Backend fill:#f3e5f5
+    style RemoteApps fill:#e8f5e8
 ```
 
 #### Detailed Component Architecture

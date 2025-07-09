@@ -307,6 +307,7 @@ graph TB
     style RestGET fill:#f3e5f5
     style UseAPIState fill:#e8f5e8
 ```
+```
 
 ### REST API Utilities
 

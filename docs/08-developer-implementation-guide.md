@@ -14,6 +14,33 @@ This comprehensive guide covers everything development teams need to know for ad
 
 Our development workflow is designed around the **upstream-first** philosophy, ensuring that all reusable functionality is developed in upstream repositories before being integrated into downstream products.
 
+```mermaid
+flowchart TD
+    Start([Feature Request]) --> Analysis{Upstream<br/>Reusable?}
+    
+    Analysis -->|Yes| UpstreamDev[Develop in Upstream<br/>Repository]
+    Analysis -->|No| DownstreamDev[Develop in Downstream<br/>Repository]
+    
+    UpstreamDev --> StandaloneTest[Test in<br/>Standalone Mode]
+    StandaloneTest --> KubeflowTest[Test in<br/>Kubeflow Mode]
+    KubeflowTest --> FederatedTest[Test in<br/>Federated Mode]
+    
+    FederatedTest --> UpstreamMerge[Merge to<br/>Upstream Main]
+    UpstreamMerge --> Release[Release to<br/>Community]
+    
+    Release --> DownstreamIntegration[Integrate into<br/>Downstream Products]
+    DownstreamDev --> DownstreamIntegration
+    
+    DownstreamIntegration --> ProductRelease[Product Release]
+    
+    style UpstreamDev fill:#e1f5fe
+    style StandaloneTest fill:#f3e5f5
+    style KubeflowTest fill:#e8f5e8
+    style FederatedTest fill:#fff3e0
+    style UpstreamMerge fill:#e0f2f1
+    style Release fill:#fce4ec
+```
+
 ## Core Philosophy: Upstream-First Development
 
 ### What is Upstream-First?
@@ -378,6 +405,37 @@ For organizations with existing monolithic applications, we recommend a phased m
 - **Community Alignment**: Migration should align with upstream community practices
 
 ## Migration Phases
+
+```mermaid
+gantt
+    title Migration to Modular Architecture
+    dateFormat  X
+    axisFormat %s
+    
+    section Phase 1: Assessment
+    Feature Audit           :p1a, 0, 2w
+    Dependency Analysis     :p1b, after p1a, 1w
+    API Definition         :p1c, after p1b, 1w
+    Team Alignment         :p1d, after p1a, 2w
+    
+    section Phase 2: Foundation
+    Shared Library Creation :p2a, after p1d, 3w
+    Development Standards   :p2b, after p1d, 2w
+    Repository Setup       :p2c, after p2a, 1w
+    CI/CD Pipeline        :p2d, after p2b, 2w
+    
+    section Phase 3: First Module
+    Feature Extraction     :p3a, after p2c, 4w
+    BFF Development       :p3b, after p2c, 3w
+    Integration Testing   :p3c, after p3a, 2w
+    Production Deployment :p3d, after p3c, 1w
+    
+    section Phase 4: Scaling
+    Remaining Features    :p4a, after p3d, 8w
+    Module Federation     :p4b, after p3d, 4w
+    Performance Optimization :p4c, after p4a, 2w
+    Documentation        :p4d, after p4a, 2w
+```
 
 ### Phase 1: Assessment and Planning
 

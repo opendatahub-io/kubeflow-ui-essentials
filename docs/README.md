@@ -43,8 +43,8 @@ This documentation incorporates insights from our platform team planning session
 |----------|-------------|
 | [**Technical Reference**](./technical-reference.md) | Comprehensive technical documentation covering shared library, API integration, component library, and advanced patterns |
 | [**Integration Examples**](./integration-examples.md) | Real-world implementation examples including Model Registry case study and Module Federation integration |
-| [**Module Federation Integration**](./17-module-federation-integration.md) | Comprehensive guide to Webpack Module Federation implementation |
-| [**Golden Path Team Onboarding**](./18-golden-path-team-onboarding.md) | Step-by-step onboarding guide for new teams adopting modular architecture |
+| [**Module Federation Integration**](./integration-examples.md#module-federation-integration) | Comprehensive guide to Webpack Module Federation implementation |
+| [**Golden Path Team Onboarding**](./08-developer-implementation-guide.md#golden-path-team-onboarding) | Step-by-step onboarding guide for new teams adopting modular architecture |
 
 ### 📋 Supporting Templates
 

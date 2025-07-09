@@ -2,6 +2,49 @@
 
 The modular architecture approach delivers significant value across multiple dimensions - for development teams, organizations, and end users.
 
+## Architecture Comparison
+
+```mermaid
+graph LR
+    subgraph "Before: Monolithic Architecture"
+        MonoRepo["Single Repository<br/>📁 Large Codebase"]
+        MonoTeam["Single Team<br/>👥 Coordination Overhead"]
+        MonoBuild["Long Build Times<br/>⏱️ 10-15 minutes"]
+        MonoDeploy["Coupled Deployment<br/>🚀 All-or-nothing releases"]
+        MonoTest["Slow Testing<br/>🧪 Full test suite required"]
+        
+        MonoRepo --> MonoTeam
+        MonoTeam --> MonoBuild
+        MonoBuild --> MonoDeploy
+        MonoDeploy --> MonoTest
+        
+        style MonoRepo fill:#ffcdd2
+        style MonoTeam fill:#ffcdd2
+        style MonoBuild fill:#ffcdd2
+        style MonoDeploy fill:#ffcdd2
+        style MonoTest fill:#ffcdd2
+    end
+    
+    subgraph "After: Modular Architecture"
+        ModRepos["Multiple Repositories<br/>📦 Focused Modules"]
+        ModTeams["Independent Teams<br/>🎯 Autonomous Development"]
+        ModBuild["Fast Build Times<br/>⚡ Under 2 minutes"]
+        ModDeploy["Independent Deployment<br/>🚢 Module-specific releases"]
+        ModTest["Fast Testing<br/>✅ Isolated test suites"]
+        
+        ModRepos --> ModTeams
+        ModTeams --> ModBuild
+        ModBuild --> ModDeploy
+        ModDeploy --> ModTest
+        
+        style ModRepos fill:#c8e6c9
+        style ModTeams fill:#c8e6c9
+        style ModBuild fill:#c8e6c9
+        style ModDeploy fill:#c8e6c9
+        style ModTest fill:#c8e6c9
+    end
+```
+
 ## For Development Teams
 
 ### Accelerated Development
